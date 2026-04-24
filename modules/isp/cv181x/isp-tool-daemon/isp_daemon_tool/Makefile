@@ -32,17 +32,17 @@ COBJS = $(patsubst $(SDIR)/%.c, $(TMP_FOLDER)/%.o, $(wildcard $(SDIR)/*.c))
 DEPS = $(patsubst $(SDIR)/%.cpp, $(TMP_FOLDER)/%.d, $(wildcard $(SDIR)/*.cpp))
 CDEPS = $(patsubst $(SDIR)/%.c, $(TMP_FOLDER)/%.d, $(wildcard $(SDIR)/*.c))
 #
-ifeq ($(TARGET_MACHINE), aarch64-linux-gnu)
-SDK_VER := 64bit
-else ifeq ($(TARGET_MACHINE), arm-linux-gnueabihf)
-SDK_VER := 32bit
-else ifeq ($(TARGET_MACHINE), arm-none-linux-musleabihf)
-SDK_VER := musl
-else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-gnu)
-SDK_VER := musl_riscv64
-else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-musl)
-SDK_VER := glibc_riscv64
-endif
+#ifeq ($(TARGET_MACHINE), aarch64-linux-gnu)
+#SDK_VER := 64bit
+#else ifeq ($(TARGET_MACHINE), arm-linux-gnueabihf)
+#SDK_VER := 32bit
+#else ifeq ($(TARGET_MACHINE), arm-none-linux-musleabihf)
+#SDK_VER := musl
+#else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-gnu)
+#SDK_VER := musl_riscv64
+#else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-musl)
+#SDK_VER := glibc_riscv64
+#endif
 AI_SDK_PATH = $(OUTPUT_DIR)/tpu_$(SDK_VER)/cvitek_ai_sdk
 TPU_SDK_PATH = $(OUTPUT_DIR)/tpu_$(SDK_VER)/cvitek_tpu_sdk
 TDL_SDK_PATH = $(TOP_DIR)/tdl_sdk/install/
@@ -135,7 +135,7 @@ else ifeq "$(TPU_SDK_PATH_EXIST)" "noexist"
 else
 	@cp $(AI_SDK_PATH)/lib/*.so* install/lib/ai -rf
 	@cp $(TPU_SDK_PATH)/lib/*.so* install/lib/ai -rf
-	@rm install/lib/ai/libcvi_rtsp.so
+	#@rm install/lib/ai/libcvi_rtsp.so
 endif
 
 ifeq "$(TDL_SDK_PATH_EXIST)" "noexist"

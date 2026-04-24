@@ -291,7 +291,7 @@ CVI_S32 SAMPLE_COMM_GetSnsI2cInfo(const ISP_SNS_OBJ_S *pstSnsObj, SAMPLE_SNS_TYP
 		}
 		return CVI_SUCCESS;
 	case GCORE_GC4653_MIPI_4M_30FPS_10BIT:
-		stSnsI2cInfo->i2c_base_info.i2c_dev = 2;
+		stSnsI2cInfo->i2c_base_info.i2c_dev = 4;
 		stSnsI2cInfo->i2c_base_info.dev_addr = 0x29;
 		stSnsI2cInfo->i2c_base_info.addr_bytes = 2;
 		stSnsI2cInfo->i2c_base_info.data_bytes = 1;

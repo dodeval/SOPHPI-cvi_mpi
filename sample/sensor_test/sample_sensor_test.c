@@ -44,7 +44,7 @@ static void sys_handle_signal(int nSignal, siginfo_t *si, void *arg)
 static int sys_vi_init(void)
 {
 	MMF_VERSION_S stVersion;
-	SAMPLE_INI_CFG_S	   stIniCfg;
+	SAMPLE_INI_CFG_S stIniCfg;
 	SAMPLE_VI_CONFIG_S stViConfig;
 
 	PIC_SIZE_E enPicSize;
@@ -306,10 +306,10 @@ static CVI_S32 sensor_dump_yuv(void)
 	int tmp;
 	struct timespec start, end;
 
-	CVI_TRACE_LOG(CVI_DBG_WARN, "Get frm from which chn(0~1): ");
+	SAMPLE_PRT("Get frm from which chn(0~1):\n");
 	scanf("%d", &tmp);
 	chn = tmp;
-	CVI_TRACE_LOG(CVI_DBG_WARN, "how many loops to do(11111 is infinite: ");
+	SAMPLE_PRT("how many loops to do (11111 is infinite):\n");
 	scanf("%d", &loop);
 	while (loop > 0) {
 		clock_gettime(CLOCK_MONOTONIC, &start);
@@ -338,11 +338,11 @@ static CVI_S32 sensor_flip_mirror(void)
 	int chnID;
 	int pipeID;
 
-	CVI_TRACE_LOG(CVI_DBG_WARN, "chn(0~1): ");
+	SAMPLE_PRT("chn(0~1):\n");
 	scanf("%d", &chnID);
-	CVI_TRACE_LOG(CVI_DBG_WARN, "Flip enable/disable(1/0): ");
+	SAMPLE_PRT("Flip enable/disable(1/0):\n");
 	scanf("%d", &flip);
-	CVI_TRACE_LOG(CVI_DBG_WARN, "Mirror enable/disable(1/0): ");
+	SAMPLE_PRT("Mirror enable/disable(1/0):\n");
 	scanf("%d", &mirror);
 	pipeID = chnID;
 	CVI_VI_SetChnFlipMirror(pipeID, chnID, flip, mirror);
@@ -365,7 +365,7 @@ static CVI_S32 sensor_dump_raw(void)
 	stVideoFrame[0].stVFrame.enPixelFormat = PIXEL_FORMAT_RGB_BAYER_12BPP;
 	stVideoFrame[1].stVFrame.enPixelFormat = PIXEL_FORMAT_RGB_BAYER_12BPP;
 
-	CVI_TRACE_LOG(CVI_DBG_WARN, "To get raw dump from dev(0~1): ");
+	SAMPLE_PRT("To get raw dump from dev(0~1):\n");
 	scanf("%d", &dev);
 
 	attr.bEnable = 1;
@@ -380,7 +380,7 @@ static CVI_S32 sensor_dump_raw(void)
 	CVI_VI_GetPipeDumpAttr(dev, &attr);
 
 	CVI_TRACE_LOG(CVI_DBG_WARN, "Enable(%d), DumpType(%d):\n", attr.bEnable, attr.enDumpType);
-	CVI_TRACE_LOG(CVI_DBG_WARN, "how many loops to do (1~60)");
+	SAMPLE_PRT("how many loops to do (1~60):\n");
 	scanf("%d", &loop);
 
 	if (loop > 60)
@@ -481,7 +481,7 @@ static CVI_S32 sensor_linear_wdr_switch(void)
 		return s32Ret;
 	}
 	// select which mode want to switch.
-	printf("Please select sensor input mode (0:linear/1:wdr) :");
+	SAMPLE_PRT("Please select sensor input mode (0:linear/1:wdr):\n");
 	scanf("%d", &tmp);
 	wdrMode = tmp;
 	if (wdrMode == 0) {
@@ -524,9 +524,9 @@ int sensor_dump(void)
 	FILE *output;
 	char img_name[128] = {0, };
 
-	CVI_TRACE_LOG(CVI_DBG_WARN, "dump addr:\n");
+	SAMPLE_PRT("dump addr:\n");
 	scanf("%llx", &addr);
-	CVI_TRACE_LOG(CVI_DBG_WARN, "dump size(0\1):\n");
+	SAMPLE_PRT("dump size(0\1):\n");
 	scanf("%x", &size);
 
 	snprintf(img_name, sizeof(img_name), "register_%llx.bin", addr);

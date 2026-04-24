@@ -5,5 +5,5 @@ libdir=${mw_dir}/lib
 Name: CVITEK System lib
 Description: SYS / VI /VO /VPSS /RGN /GDC / ISP / VENC / BIN libs
 Version: 2.0
-Cflags: -I${includedir} -I${includedir}/isp/cv181x
+Cflags: -I${includedir} -I${includedir}/isp/cv181x -I${mw_dir}/component/isp/common
 Libs: -L${libdir} -lsys -lvi -lvo -lvpss -lrgn -lgdc -lvenc -lcvi_bin -lcvi_bin_isp -lisp -lisp_algo -lae -laf -lawb -lsns_full -latomic
