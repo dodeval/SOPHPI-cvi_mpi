@@ -52,23 +52,23 @@ install:
 	@mkdir -p $(DESTDIR)/usr/lib/3rd
 ifneq ($(FLASH_SIZE_SHRINK),y)
 	# copy sample_xxx
-	@cp -f sample/mipi_tx/sample_dsi $(DESTDIR)/usr/bin
-	@cp -f sample/cipher/sample_cipher $(DESTDIR)/usr/bin
-	@cp -f sample/cvg/sample_cvg $(DESTDIR)/usr/bin
+	#@cp -f sample/mipi_tx/sample_dsi $(DESTDIR)/usr/bin
+	#@cp -f sample/cipher/sample_cipher $(DESTDIR)/usr/bin
+	#@cp -f sample/cvg/sample_cvg $(DESTDIR)/usr/bin
 	@cp -f sample/venc/sample_venc $(DESTDIR)/usr/bin
 	@cp -f sample/venc/sample_vcodec $(DESTDIR)/usr/bin
 	@cp -f sample/vdec/sample_vdec $(DESTDIR)/usr/bin
 
-	@cp -f self_test/cvi_test/cvi_test $(DESTDIR)/usr/bin
-	@cp -f self_test/cvi_test/sensor_cfg.ini $(DESTDIR)/usr/bin
+	#@cp -f self_test/cvi_test/cvi_test $(DESTDIR)/usr/bin
+	#@cp -f self_test/cvi_test/sensor_cfg.ini $(DESTDIR)/usr/bin
 endif
 
 ifneq ($(FLASH_SIZE_SHRINK),y)
 	# copy venc
-	@cp -f modules/venc/vc_lib/bin/cvi_h265_enc_test $(DESTDIR)/usr/bin
-	@cp -f modules/venc/vc_lib/bin/cvi_h265_dec $(DESTDIR)/usr/bin
-	@cp -f modules/venc/vc_lib/bin/cvi_h264_dec $(DESTDIR)/usr/bin
-	@cp -f modules/venc/vc_lib/bin/cvi_jpg_codec $(DESTDIR)/usr/bin
+	#@cp -f modules/venc/vc_lib/bin/cvi_h265_enc_test $(DESTDIR)/usr/bin
+	#@cp -f modules/venc/vc_lib/bin/cvi_h265_dec $(DESTDIR)/usr/bin
+	#@cp -f modules/venc/vc_lib/bin/cvi_h264_dec $(DESTDIR)/usr/bin
+	#@cp -f modules/venc/vc_lib/bin/cvi_jpg_codec $(DESTDIR)/usr/bin
 endif
 
 ifneq ($(FLASH_SIZE_SHRINK),y)
