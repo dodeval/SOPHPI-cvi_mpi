@@ -201,8 +201,8 @@ int dsi_init(int devno, const struct dsc_instr *cmds, int size)
 {
 	int ret;
 
-	if (cmds == NULL) {
-		return CVI_FAILURE;
+	if (cmds == NULL || size == 0) {
+		return CVI_SUCCESS;
 	}
 
 	for (int i = 0; i < size; i++) {

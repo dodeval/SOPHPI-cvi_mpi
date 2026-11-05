@@ -20,9 +20,9 @@
 
 #include "sample_comm.h"
 
-#define LT9611_I2C_NAME 	"lt9611"
+#define LT9611_I2C_NAME      "lt9611"
 #define LT9611_I2C_ADDR      0x3B    /* 7bit addr */
-#define LT9611_I2C_DEV       4
+#define LT9611_I2C_DEV       1
 
 void Timer0_Delay1ms(uint32_t u32CNT)
 {
@@ -253,7 +253,7 @@ typedef enum
 
 struct Lontium_IC_Mode lt9611 = {
 single_port_mipi, //mipi_port_cnt; //single_port_mipi or dual_port_mipi
-lane_cnt_4,       //mipi_lane_cnt; //1 or 2 or 4
+lane_cnt_2,       //mipi_lane_cnt; //1 or 2 or 4
 dsi,              //mipi_mode;     //dsi or csi
 Burst_Mode,
 audio_i2s,       //audio_out      //audio_i2s or audio_spdif       //hdmi_coupling_mode;//ac_mode or dc_mode
@@ -295,7 +295,7 @@ static const char* s_hdmi_resolution_arr[] = {
 	"1920x1080_60HZ",
 };
 
-static LT9611_VIDEO_FORMAT_E g_video_format = E_LT9611_VIDEO_1920x1080_60HZ;
+static LT9611_VIDEO_FORMAT_E g_video_format = E_LT9611_VIDEO_1920x1080_30HZ;
 //DTV 									      // hfp, hs, hbp,hact,htotal,vfp, vs, vbp,vact,vtotal, hfp, hs, hbp,hact,htotal,vfp, vs, vbp,vact,vtotal, h_polary, v_polary, vic, pclk_khz
 static struct video_timing video_640x480_60Hz     ={16, 96,  48, 640,   800, 10,  2,  33, 480,   525, 0, 0, 1, AR_4_3, 25000};
 static struct video_timing video_720x480_60Hz     ={16, 62,  60, 720,   858,  9,  6,  30, 480,   525, 0, 0, 2, AR_4_3, 27000};
@@ -2450,7 +2450,7 @@ void LT9611_pattern(void)
 
 	lt9611_i2c_write_byte(0x34,0xd4); //CTS_N
 #endif
-    LT9611_Audio_Init();
+    	LT9611_Audio_Init();
 	LT9611_HDCP_Init();
 	LT9611_load_hdcp_key();
 
@@ -2573,7 +2573,7 @@ static void __upadte_video(LT9611_VIDEO_FORMAT_E enVideoFormat)
 
 void lt9611_init(LT9611_VIDEO_FORMAT_E enVideoFormat)
 {
-	LT9611_init_i2c();
+    LT9611_init_i2c();
     LT9611_Chip_ID();
     LT9611_System_Init();
 
@@ -2612,7 +2612,7 @@ CVI_S32 lt9611_get_video_format(char* pinput_str)
 {
 	CVI_S32 i = 0;
 	bool is_find = false;
-	for(int i=0;i<E_LT9611_VIDEO_MAX;i++)
+	for(i=0;i<E_LT9611_VIDEO_MAX;i++)
 	{
 		if(strcmp(pinput_str, s_hdmi_resolution_arr[i]) == 0)
 		{
@@ -2657,7 +2657,13 @@ void printHdmiHelp(char **argv)
 int main(int argc, char *argv[])
 {
 	if(argc == 1) {
-		lt9611_init(g_video_format);
+		#ifdef _pattern_test_
+			CVI_TRACE_LOG(CVI_DBG_INFO, "RUNNING HARDWARE PATTERN TEST MODE\n");
+			LT9611_init_i2c();
+			LT9611_pattern();
+		#else
+			lt9611_init(g_video_format);
+		#endif
 		return CVI_SUCCESS;
 	}
 
@@ -2701,7 +2707,6 @@ int main(int argc, char *argv[])
 	if(optind < argc){
 		printHdmiHelp(argv);
 	}
-
 	lt9611_init(g_video_format);
 
 	return CVI_SUCCESS;
