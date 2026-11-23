@@ -444,7 +444,7 @@ CVI_S32 SAMPLE_VPSS_Overlay_vi_2vdec(CVI_VOID)
 	stViConfig.s32WorkingViNum				     = 1;
 	stViConfig.as32WorkingViId[0]				     = 0;
 	stViConfig.astViInfo[s32WorkSnsId].stSnsInfo.MipiDev	     = 0xFF;
-	stViConfig.astViInfo[s32WorkSnsId].stSnsInfo.s32BusId	     = 3;
+	stViConfig.astViInfo[s32WorkSnsId].stSnsInfo.s32BusId	     = 4;
 	stViConfig.astViInfo[s32WorkSnsId].stDevInfo.ViDev	     = ViDev;
 	stViConfig.astViInfo[s32WorkSnsId].stDevInfo.enWDRMode	     = enWDRMode;
 	stViConfig.astViInfo[s32WorkSnsId].stPipeInfo.enMastPipeMode = enMastPipeMode;
@@ -572,8 +572,8 @@ CVI_S32 SAMPLE_VPSS_Overlay_vi_2vdec(CVI_VOID)
 	stVpssGrpAttr.u32MaxH                        = stSize.u32Height;
 	stVpssGrpAttr.u8VpssDev                      = 0;
 
-	astVpssChnAttr[VpssChn].u32Width                    = 1280;
-	astVpssChnAttr[VpssChn].u32Height                   = 720;
+	astVpssChnAttr[VpssChn].u32Width                    = 1024;
+	astVpssChnAttr[VpssChn].u32Height                   = 756;
 	astVpssChnAttr[VpssChn].enVideoFormat               = VIDEO_FORMAT_LINEAR;
 	astVpssChnAttr[VpssChn].enPixelFormat               = SAMPLE_PIXEL_FORMAT;
 	astVpssChnAttr[VpssChn].stFrameRate.s32SrcFrameRate = 30;
@@ -622,8 +622,8 @@ CVI_S32 SAMPLE_VPSS_Overlay_vi_2vdec(CVI_VOID)
 	 * step6:  Init VO
 	 ************************************************/
 	SAMPLE_VO_CONFIG_S stVoConfig;
-	RECT_S stDefDispRect  = {0, 0, 720, 1280};
-	SIZE_S stDefImageSize = {720, 1280};
+	RECT_S stDefDispRect  = {0, 0, 720, 576};
+	SIZE_S stDefImageSize = {720, 576};
 	VO_CHN VoChn = 0;
 
 	s32Ret = SAMPLE_COMM_VO_GetDefConfig(&stVoConfig);
@@ -634,7 +634,7 @@ CVI_S32 SAMPLE_VPSS_Overlay_vi_2vdec(CVI_VOID)
 
 	stVoConfig.VoDev		 = 0;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_576P50;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;

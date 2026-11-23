@@ -270,8 +270,8 @@ error:
 CVI_S32 SAMPLE_PLAT_VO_INIT_BT656(void)
 {
 	SAMPLE_VO_CONFIG_S stVoConfig;
-	RECT_S stDefDispRect  = {0, 0, 720, 576};
-	SIZE_S stDefImageSize = {720, 576};
+	RECT_S stDefDispRect  = {0, 0, 1280, 720};
+	SIZE_S stDefImageSize = {1280, 720};
 	CVI_S32 s32Ret = CVI_SUCCESS;
 
 	CVI_U32 panel_init = false;
@@ -296,7 +296,7 @@ CVI_S32 SAMPLE_PLAT_VO_INIT_BT656(void)
 
 	stVoConfig.VoDev	 = 0;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_BT656;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_576P50;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;
@@ -317,8 +317,8 @@ error:
 CVI_S32 SAMPLE_PLAT_VO_INIT(void)
 {
 	SAMPLE_VO_CONFIG_S stVoConfig;
-	RECT_S stDefDispRect  = {0, 0, 720, 1280};
-	SIZE_S stDefImageSize = {720, 1280};
+	RECT_S stDefDispRect  = {0, 0, 1280, 720};
+	SIZE_S stDefImageSize = {1280, 720};
 	CVI_S32 s32Ret = CVI_SUCCESS;
 
 	CVI_U32 panel_init = false;
@@ -343,7 +343,7 @@ CVI_S32 SAMPLE_PLAT_VO_INIT(void)
 
 	stVoConfig.VoDev	 = 0;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;

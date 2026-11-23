@@ -63,11 +63,11 @@ void Timer0_Delay1ms(uint32_t u32CNT)
 #define dc_mode     1
 
 #define hdcp_disable 0
-#define hdcp_enable 1
+#define hdcp_enable  1
 
-#define HPD_INTERRUPT_ENABLE            0x01
-#define VID_CHG_INTERRUPT_ENABLE    0x02
-#define CEC_INTERRUPT_ENABLE             0x03
+#define HPD_INTERRUPT_ENABLE		0x01
+#define VID_CHG_INTERRUPT_ENABLE	0x02
+#define CEC_INTERRUPT_ENABLE		0x03
 
 #define RGB888 0x00
 #define YUV422 0x01
@@ -79,45 +79,42 @@ void Timer0_Delay1ms(uint32_t u32CNT)
 #define AR_4_3 0x01
 #define AR_16_9 0x02
 
-
-#define	MPEG_PKT_EN 0x01
-#define	AIF_PKT_EN  0x02
+#define	MPEG_PKT_EN 	0x01
+#define	AIF_PKT_EN  	0x02
 #define SPD_PKT_EN	0x04
 #define AVI_PKT_EN	0x08
 #define UD1_PKT_EN	0x10
 #define UD0_PKT_EN	0x20
 
-#define CEC_SEND_DONE	0x01
-#define CEC_REC_DATA	0x02
-#define CEC_NACK	    0x04
-#define CEC_ARB_LOST	0x08
+#define CEC_SEND_DONE		0x01
+#define CEC_REC_DATA		0x02
+#define CEC_NACK	    	0x04
+#define CEC_ARB_LOST		0x08
 #define CEC_ERROR_INITIATOR	0x10
 #define CEC_ERROR_FOLLOWER	0x20
-#define CEC_WAKE_UP 	0x40
+#define CEC_WAKE_UP 		0x40
 
-
-#define	MSG_USRCNTRL_PRESS		0X44
+#define	MSG_USRCNTRL_PRESS	0X44
 #define	MSG_USRCNTRL_RELEASE	0X45
-#define	MSG_OSD_GET				0x46
-#define	MSG_OSD_SET				0x47
-#define	MSG_PHYADDR_GET			0x83
-#define	MSG_PHYADDR_SET			0x84
-#define	MSG_STREAM_SET			0X86
+#define	MSG_OSD_GET		0x46
+#define	MSG_OSD_SET		0x47
+#define	MSG_PHYADDR_GET		0x83
+#define	MSG_PHYADDR_SET		0x84
+#define	MSG_STREAM_SET		0X86
 #define	MSG_ACTIVESOURCE_GET	0X82
-#define	MSG_VENDOR_GET			0x8C
-#define	MSG_MENUSTATUS_GET		0X8D
-#define	MSG_MENUSTATUS_SET		0X8E
+#define	MSG_VENDOR_GET		0x8C
+#define	MSG_MENUSTATUS_GET	0X8D
+#define	MSG_MENUSTATUS_SET	0X8E
 #define	MSG_MEBUSTATUS_ACTIVE	0X00
-#define	MSG_POWERSTATUS_GET		0X8F
-#define	MSG_POWERSTATUS_SET		0X90
-#define	MSG_POWERSTATUS_ON		0X00
-#define	MSG_CECVERSION_GET		0x9F
-#define	MSG_CECVERSION_SET		0X9E
-#define	MSG_CECVERSION_1_4		0X05
-#define	MSG_FEATURE_ABRT		0x00
-#define	MSG_ABORT		        0xFF
-#define	MSG_ABRT_REASON			0x00
-
+#define	MSG_POWERSTATUS_GET	0X8F
+#define	MSG_POWERSTATUS_SET	0X90
+#define	MSG_POWERSTATUS_ON	0X00
+#define	MSG_CECVERSION_GET	0x9F
+#define	MSG_CECVERSION_SET	0X9E
+#define	MSG_CECVERSION_1_4	0X05
+#define	MSG_FEATURE_ABRT	0x00
+#define	MSG_ABORT		0xFF
+#define	MSG_ABRT_REASON		0x00
 
 #define CEC_ABORT_REASON_0 	0x00 //Unrecoanized opcode
 #define CEC_ABORT_REASON_1 	0x01 //Not in correct mode to respond
@@ -140,21 +137,21 @@ typedef struct Lontium_IC_Mode{
 
 
 typedef struct video_timing{
-    CVI_U16 hfp;
-        CVI_U16 hs;
-        CVI_U16 hbp;
-        CVI_U16 hact;
-        CVI_U16 htotal;
-        CVI_U16 vfp;
-        CVI_U16 vs;
-        CVI_U16 vbp;
-        CVI_U16 vact;
-        CVI_U16 vtotal;
-        bool h_polarity;
-        bool v_polarity;
-        CVI_U16	vic;
-        CVI_U8 aspact_ratio;  // 0=no data, 1=4:3, 2=16:9, 3=no data.
-    CVI_U32 pclk_khz;
+	CVI_U16 hfp;
+	CVI_U16 hs;
+	CVI_U16 hbp;
+	CVI_U16 hact;
+	CVI_U16 htotal;
+	CVI_U16 vfp;
+	CVI_U16 vs;
+	CVI_U16 vbp;
+	CVI_U16 vact;
+	CVI_U16 vtotal;
+	bool h_polarity;
+	bool v_polarity;
+	CVI_U16	vic;
+	CVI_U8 aspact_ratio;  // 0=no data, 1=4:3, 2=16:9, 3=no data.
+	CVI_U32 pclk_khz;
 } __video_timing;
 
 typedef struct cec_msg{
@@ -171,7 +168,7 @@ typedef struct cec_msg{
 
 typedef enum VideoFormat
 {
-	video_640x480_60Hz_vic1 = 1,       //vic 1
+	video_640x480_60Hz_vic1 = 1,   //vic 1
 	video_720x480_60Hz_vic3,       //vic 2
 	video_720x576_50Hz_vic,
 	video_1280x720_60Hz_vic4,      //vic 3
@@ -287,6 +284,9 @@ static optionExt long_option_ext[] = {
 };
 
 static const char* s_hdmi_resolution_arr[] = {
+	"640x480_60HZ",
+	"720x576_50HZ",
+	"720x480_60HZ",
 	"1024x768_60HZ",
 	"1280x720_60HZ",
 	"1280x1024_60HZ",
@@ -295,19 +295,19 @@ static const char* s_hdmi_resolution_arr[] = {
 	"1920x1080_60HZ",
 };
 
-static LT9611_VIDEO_FORMAT_E g_video_format = E_LT9611_VIDEO_1920x1080_30HZ;
+static LT9611_VIDEO_FORMAT_E g_video_format = E_LT9611_VIDEO_1280x720_60HZ;
 //DTV 									      // hfp, hs, hbp,hact,htotal,vfp, vs, vbp,vact,vtotal, hfp, hs, hbp,hact,htotal,vfp, vs, vbp,vact,vtotal, h_polary, v_polary, vic, pclk_khz
 static struct video_timing video_640x480_60Hz     ={16, 96,  48, 640,   800, 10,  2,  33, 480,   525, 0, 0, 1, AR_4_3, 25000};
 static struct video_timing video_720x480_60Hz     ={16, 62,  60, 720,   858,  9,  6,  30, 480,   525, 0, 0, 2, AR_4_3, 27000};
 static struct video_timing video_720x576_50Hz     ={12, 64,  68, 720,   864,  5,  5,  39, 576,   625, 0, 0, 17,AR_4_3, 27000};
 
-static struct video_timing video_1280x720_60Hz    ={110,40, 220,1280,  1650,  5,  5,  20, 720,   750, 1, 1, 4, AR_16_9,74250};
-static struct video_timing video_1280x720_50Hz    ={440,40, 220,1280,  1980,  5,  5,  20, 720,   750, 1, 1, 19,AR_16_9,74250};
-static struct video_timing video_1280x720_30Hz    ={1760, 40, 220,1280,  3300,  5,  5,  20, 720, 750,   1,1,0, AR_16_9,74250};
+static struct video_timing video_1280x720_60Hz    ={110,  40, 220, 1280, 1650,  5,  5, 20, 720, 750, 1, 1, 4, AR_16_9, 74250};
+static struct video_timing video_1280x720_50Hz    ={440,  40, 220, 1280, 1980,  5,  5, 20, 720, 750, 1, 1, 19,AR_16_9, 74250};
+static struct video_timing video_1280x720_30Hz    ={1760, 40, 220, 1280, 3300,  5,  5, 20, 720, 750, 1, 1, 0, AR_16_9, 74250};
 
-static struct video_timing video_1920x1080_60Hz   ={88, 44, 148,1920,  2200,  4,  5,  36, 1080,  1125, 1,1,16,AR_16_9,148500};
+static struct video_timing video_1920x1080_60Hz   ={88,  44, 148,1920,  2200,  4,  5,  36, 1080,  1125, 1,1,16,AR_16_9,148500};
 static struct video_timing video_1920x1080_50Hz   ={528, 44, 148,1920, 2640,  4,  5,  36, 1080, 1125, 1,1,31,AR_16_9,148500};
-static struct video_timing video_1920x1080_30Hz   ={88, 44, 148,1920,  2200,  4,  5,  36, 1080,  1125, 1,1,34,AR_16_9,74250};
+static struct video_timing video_1920x1080_30Hz   ={88,  44, 148,1920,  2200,  4,  5,  36, 1080,  1125, 1,1,34,AR_16_9,74250};
 static struct video_timing video_1920x1080_25Hz   ={528, 44, 148,1920,  2640,  4,  5,  36, 1080, 1125, 1,1,33,AR_16_9,74250};
 static struct video_timing video_1920x1080_24Hz   ={638, 44, 148,1920,  2750,  4,  5,  36, 1080, 1125, 1,1,32,AR_16_9,74250};
 
@@ -388,9 +388,9 @@ static int fd = -1;
 
 void LT9611_init_i2c(void)
 {
-    char temp[16] = {0};
+	char temp[16] = {0};
 
-    snprintf(temp, sizeof(temp), "/dev/i2c-%u", LT9611_I2C_DEV);
+	snprintf(temp, sizeof(temp), "/dev/i2c-%u", LT9611_I2C_DEV);
 
 	fd = open(temp, O_RDWR);
 
@@ -464,13 +464,13 @@ static int lt9611_i2c_read_byte(CVI_U8 u8RegAddr)
 
 void LT9611_Chip_ID(void)
 {
-    lt9611_i2c_write_byte(0xFF,0x80);
-    lt9611_i2c_write_byte(0xee,0x01);
-    CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611 ring Chip ID = 0x%x, 0x%x, 0x%x\n",lt9611_i2c_read_byte(0x00),
-    lt9611_i2c_read_byte(0x01), lt9611_i2c_read_byte(0x02));
-    lt9611_i2c_write_byte(0xFF,0x81);
-    lt9611_i2c_write_byte(0x01,0x18); //sel xtal clock
-    lt9611_i2c_write_byte(0xFF,0x80);
+	lt9611_i2c_write_byte(0xFF,0x80);
+	lt9611_i2c_write_byte(0xee,0x01);
+	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611 ring Chip ID = 0x%x, 0x%x, 0x%x\n",lt9611_i2c_read_byte(0x00),
+	lt9611_i2c_read_byte(0x01), lt9611_i2c_read_byte(0x02));
+	lt9611_i2c_write_byte(0xFF,0x81);
+	lt9611_i2c_write_byte(0x01,0x18); //sel xtal clock
+	lt9611_i2c_write_byte(0xFF,0x80);
 }
 
 void LT9611_RST_PD_Init(void)
@@ -487,16 +487,16 @@ void LT9611_LowPower_mode(bool on)
 {
 	/* only hpd irq is working for low power consumption */
 	/* 1.8V: 15 mA */
-    if(on)
-    {
-        lt9611_i2c_write_byte(0xFF,0x81);
-        lt9611_i2c_write_byte(0x02,0x49);
-        lt9611_i2c_write_byte(0x23,0x80);
-        lt9611_i2c_write_byte(0x30,0x00); //0x00 --> 0xc0, tx phy and clk can not power down, otherwise dc det don't work.
+	if(on)
+	{
+		lt9611_i2c_write_byte(0xFF,0x81);
+		lt9611_i2c_write_byte(0x02,0x49);
+		lt9611_i2c_write_byte(0x23,0x80);
+		lt9611_i2c_write_byte(0x30,0x00); //0x00 --> 0xc0, tx phy and clk can not power down, otherwise dc det don't work.
 
-        lt9611_i2c_write_byte(0xff,0x80);
-        lt9611_i2c_write_byte(0x11,0x0a);
-    }
+		lt9611_i2c_write_byte(0xff,0x80);
+		lt9611_i2c_write_byte(0x11,0x0a);
+	}
 	else
 	{
 		lt9611_i2c_write_byte(0xFF,0x81);
@@ -560,13 +560,14 @@ void LT9611_MIPI_Input_Digtal(void) //weiguo
 	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_MIPI_Input_Digtal: lt9611 set mipi lanes = %d", lanes);
 
 	lt9611_i2c_write_byte(0xff,0x82);
-	lt9611_i2c_write_byte(0x4f,0x80);    //[7] = Select ad_txpll_d_clk.
-	lt9611_i2c_write_byte(0x50,0x10);
+	lt9611_i2c_write_byte(0x50,0x14);
+	lt9611_i2c_write_byte(0x4f,0x80);//[7] = Select ad_txpll_d_clk.
 
 	lt9611_i2c_write_byte(0xff,0x83);
+	lt9611_i2c_write_byte(0x03,0x40);//[6] = Port swap
 	lt9611_i2c_write_byte(0x00,lanes);
-	lt9611_i2c_write_byte(0x02,0x08); //settle
-	lt9611_i2c_write_byte(0x06,0x08); //settle
+	lt9611_i2c_write_byte(0x02,0x0A); //settle
+	lt9611_i2c_write_byte(0x06,0x0A); //settle
 
 	if(1)//(P10) //single_port_mipi
 	{
@@ -575,8 +576,8 @@ void LT9611_MIPI_Input_Digtal(void) //weiguo
 	}
 	else    //dual_port_mipi
 	{
-	lt9611_i2c_write_byte(0x0a,0x03); //1=dual_lr, 0=dual_en
-	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_MIPI_Input_Digtal: lt9611 set mipi port = 2\n");
+		lt9611_i2c_write_byte(0x0a,0x03); //1=dual_lr, 0=dual_en
+		CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_MIPI_Input_Digtal: lt9611 set mipi port = 2\n");
 	}
 
 #if 1
@@ -587,11 +588,11 @@ void LT9611_MIPI_Input_Digtal(void) //weiguo
 		lt9611_i2c_write_byte(0x08,0x10); //csi_en
 		lt9611_i2c_write_byte(0x2c,0x40); //csi_sel
 
-       	if(lt9611.input_color_space == RGB888)
-    	{
-    	   lt9611_i2c_write_byte(0xff,0x83);
-    	   lt9611_i2c_write_byte(0x1c,0x01);
-    	}
+	       	if(lt9611.input_color_space == RGB888)
+    		{
+    			lt9611_i2c_write_byte(0xff,0x83);
+    			lt9611_i2c_write_byte(0x1c,0x01);
+    		}
 	}
 	else
 	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_MIPI_Input_Digtal: LT9611.mipi_mode = dsi\n");
@@ -606,11 +607,11 @@ void LT9611_Video_Check(void) //dsren
 	CVI_U16 h_total_sysclk;
 
 	lt9611_i2c_write_byte(0xff,0x82); // top video check module
-    h_total_sysclk = lt9611_i2c_read_byte(0x86);
-    h_total_sysclk = (h_total_sysclk<<8) + lt9611_i2c_read_byte(0x87);
-    CVI_TRACE_LOG(CVI_DBG_INFO, "\33[32m\n");
-    CVI_TRACE_LOG(CVI_DBG_INFO, "-----------------------------------------------------------------------------\n");
-    CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_Video_Check: h_total_sysclk = %d",h_total_sysclk);
+	h_total_sysclk = lt9611_i2c_read_byte(0x86);
+	h_total_sysclk = (h_total_sysclk<<8) + lt9611_i2c_read_byte(0x87);
+ 	CVI_TRACE_LOG(CVI_DBG_INFO, "\33[32m\n");
+	CVI_TRACE_LOG(CVI_DBG_INFO, "-----------------------------------------------------------------------------\n");
+	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_Video_Check: h_total_sysclk = %d",h_total_sysclk);
 
 	v_act=lt9611_i2c_read_byte(0x82);
 	v_act=(v_act<<8)+lt9611_i2c_read_byte(0x83);
@@ -834,7 +835,6 @@ void LT9611_MIPI_Pcr(struct video_timing *video_format) //weiguo
 
 	lt9611_i2c_write_byte(0xff,0x83);
 
-//    if(P10 == 0) //dual port.
 	if(0) //dual port.
 	{
 		hact = (hact>>2);
@@ -859,11 +859,8 @@ void LT9611_MIPI_Pcr(struct video_timing *video_format) //weiguo
 
 	/* stage 1 */
 	lt9611_i2c_write_byte(0x21,0x4a); //bit[3:0] step[11:8]
-	//lt9611_i2c_write_byte(0x22,0x40);//step[7:0]
-
 	lt9611_i2c_write_byte(0x24,0x71); //bit[7:4]v/h/de mode; line for clk stb[11:8]
 	lt9611_i2c_write_byte(0x25,0x30); //line for clk stb[7:0]
-
 	lt9611_i2c_write_byte(0x2a,0x01); //clk stable in
 
 	/* stage 2 */
@@ -902,7 +899,6 @@ void LT9611_MIPI_Pcr(struct video_timing *video_format) //weiguo
 			lt9611_i2c_write_byte(0x23,0x28);  //
 			lt9611_i2c_write_byte(0x4a,0x10);
 			lt9611_i2c_write_byte(0x1d,0xf3);  //
-
 			CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_MIPI_Pcr: 640x480_60Hz\n");
 		break;
 
@@ -913,8 +909,8 @@ void LT9611_MIPI_Pcr(struct video_timing *video_format) //weiguo
 			lt9611_i2c_write_byte(0x2a,0x10); //clk stable in
 
 			/* stage 2 */
-			//lt9611_i2c_write_byte(0x23,0x04); //pcr h mode step
-			//lt9611_i2c_write_byte(0x4a,0x10); //offset //0x10
+			lt9611_i2c_write_byte(0x23,0x04); //pcr h mode step
+			lt9611_i2c_write_byte(0x4a,0x10); //offset //0x10
 			lt9611_i2c_write_byte(0x1d,0xf0); //PCR de mode step setting.
 		break;
 
@@ -922,13 +918,13 @@ void LT9611_MIPI_Pcr(struct video_timing *video_format) //weiguo
 	}
 	LT9611_MIPI_Video_Timing(video);
 
-	//lt9611_i2c_write_byte(0xff,0x83);
-	//lt9611_i2c_write_byte(0x26,pcr_m);
+	lt9611_i2c_write_byte(0xff,0x83);
+	lt9611_i2c_write_byte(0x26,pcr_m);
 
 	lt9611_i2c_write_byte(0xff,0x80);
 	lt9611_i2c_write_byte(0x11,0x5a); //Pcr reset
-	//lt9611_i2c_write_byte(0x11,0xfa);
-	lt9611_i2c_write_byte(0x11,0xf8);
+	lt9611_i2c_write_byte(0x11,0xfa);
+	//lt9611_i2c_write_byte(0x11,0xf8);
 }
 
 void LT9611_PLL(struct video_timing *video_format) //zhangzhichun
@@ -943,22 +939,18 @@ void LT9611_PLL(struct video_timing *video_format) //zhangzhichun
 	lt9611_i2c_write_byte(0xff,0x81);
 	lt9611_i2c_write_byte(0x23,0x40); //Enable LDO and disable PD
 	lt9611_i2c_write_byte(0x24,0x62); //0x62, LG25UM58 issue, 20180824
-	//lt9611_i2c_write_byte(0x25,0x80); //pre-divider
-	lt9611_i2c_write_byte(0x25,0xc2); //pre-divider
+	lt9611_i2c_write_byte(0x25,0x80); //pre-divider
 	lt9611_i2c_write_byte(0x26,0x55);
 	lt9611_i2c_write_byte(0x2c,0x37);
-	//lt9611_i2c_write_byte(0x2d,0x99); //txpll_divx_set&da_txpll_freq_set
-	//lt9611_i2c_write_byte(0x2e,0x01);
 	lt9611_i2c_write_byte(0x2f,0x01);
-	//lt9611_i2c_write_byte(0x26,0x55);
+	lt9611_i2c_write_byte(0x26,0x55);
 	lt9611_i2c_write_byte(0x27,0x66);
 	lt9611_i2c_write_byte(0x28,0x88);
-
 	lt9611_i2c_write_byte(0x2a,0x20); //for U3.
 
 	if(pclk > 150000)
 	{
-	lt9611_i2c_write_byte(0x2d,0x88);
+		lt9611_i2c_write_byte(0x2d,0x88);
 		hdmi_post_div = 0x01;
 	}
 	else if(pclk > 70000)
@@ -972,12 +964,8 @@ void LT9611_PLL(struct video_timing *video_format) //zhangzhichun
 		hdmi_post_div = 0x04;
 	}
 
-	//pcr_m = (CVI_U8)((pclk*5*hdmi_post_div)/27000);
-	//pcr_m --;
-
-	pcr_m = 20*hdmi_post_div;
-
-
+	pcr_m = (CVI_U8)((pclk*5*hdmi_post_div)/27000);
+	pcr_m --;
 	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_PLL: pcr_m = 0x%x, hdmi_post_div = %d", pcr_m, hdmi_post_div); //Hex
 
 	lt9611_i2c_write_byte(0xff,0x83);
@@ -1006,13 +994,13 @@ void LT9611_PLL(struct video_timing *video_format) //zhangzhichun
 	/* pll lock status */
 	for(i = 0; i < 6 ; i++)
 	{
-        lt9611_i2c_write_byte(0xff,0x80);
-        lt9611_i2c_write_byte(0x16,0xe3); /* pll lock logic reset */
-        lt9611_i2c_write_byte(0x16,0xf3);
-        lt9611_i2c_write_byte(0xff,0x82);
-        cal_done_flag = lt9611_i2c_read_byte(0xe7);
-        band_out = lt9611_i2c_read_byte(0xe6);
-        pll_lock_flag = lt9611_i2c_read_byte(0x15);
+        	lt9611_i2c_write_byte(0xff,0x80);
+		lt9611_i2c_write_byte(0x16,0xe3); /* pll lock logic reset */
+ 		lt9611_i2c_write_byte(0x16,0xf3);
+		lt9611_i2c_write_byte(0xff,0x82);
+		cal_done_flag = lt9611_i2c_read_byte(0xe7);
+		band_out = lt9611_i2c_read_byte(0xe6);
+		pll_lock_flag = lt9611_i2c_read_byte(0x15);
 
 		if((pll_lock_flag & 0x80)&&(cal_done_flag & 0x80)&&(band_out != 0xff))
 		{
@@ -1021,13 +1009,13 @@ void LT9611_PLL(struct video_timing *video_format) //zhangzhichun
 		}
 		else
 		{
-            lt9611_i2c_write_byte(0xff,0x80);
-            lt9611_i2c_write_byte(0x11,0x5a); /* Pcr clk reset */
-            lt9611_i2c_write_byte(0x11,0xfa);
-            lt9611_i2c_write_byte(0x16,0xf2); /* pll cal digital reset */
-            lt9611_i2c_write_byte(0x18,0xdc); /* pll analog reset */
-            lt9611_i2c_write_byte(0x18,0xfc);
-            lt9611_i2c_write_byte(0x16,0xf3); /*start calibration*/
+			lt9611_i2c_write_byte(0xff,0x80);
+			lt9611_i2c_write_byte(0x11,0x5a); /* Pcr clk reset */
+			lt9611_i2c_write_byte(0x11,0xfa);
+			lt9611_i2c_write_byte(0x16,0xf2); /* pll cal digital reset */
+			lt9611_i2c_write_byte(0x18,0xdc); /* pll analog reset */
+			lt9611_i2c_write_byte(0x18,0xfc);
+			lt9611_i2c_write_byte(0x16,0xf3); /*start calibration*/
 			CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_PLL: HDMI pll unlocked, reset pll\n");
 		}
 	}
@@ -1047,18 +1035,18 @@ void LT9611_HDMI_TX_Phy(void) //xyji
 		lt9611_i2c_write_byte(0x31,0x44);
 		CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Phy: DC couple\n");
 	}
-		lt9611_i2c_write_byte(0x32,0x4a);
-		lt9611_i2c_write_byte(0x33,0x0b);
-		lt9611_i2c_write_byte(0x34,0x00);
-		lt9611_i2c_write_byte(0x35,0x00);
-		lt9611_i2c_write_byte(0x36,0x00);
-		lt9611_i2c_write_byte(0x37,0x44);
-		lt9611_i2c_write_byte(0x3f,0x0f);
-		lt9611_i2c_write_byte(0x40,0x98); //clk swing
-		lt9611_i2c_write_byte(0x41,0x98); //D0 swing
-		lt9611_i2c_write_byte(0x42,0x98); //D1 swing
-		lt9611_i2c_write_byte(0x43,0x98); //D2 swing
-		lt9611_i2c_write_byte(0x44,0x0a);
+	lt9611_i2c_write_byte(0x32,0x4a);
+	lt9611_i2c_write_byte(0x33,0x0b);
+	lt9611_i2c_write_byte(0x34,0x00);
+	lt9611_i2c_write_byte(0x35,0x00);
+	lt9611_i2c_write_byte(0x36,0x00);
+	lt9611_i2c_write_byte(0x37,0x44);
+	lt9611_i2c_write_byte(0x3f,0x0f);
+	lt9611_i2c_write_byte(0x40,0x98); //clk swing
+	lt9611_i2c_write_byte(0x41,0x98); //D0 swing
+	lt9611_i2c_write_byte(0x42,0x98); //D1 swing
+	lt9611_i2c_write_byte(0x43,0x98); //D2 swing
+	lt9611_i2c_write_byte(0x44,0x0a);
 }
 
 void LT9611_HDCP_Init(void) //luodexing
@@ -1107,7 +1095,7 @@ void LT9611_HDMI_Out_Enable(void) //dsren
 	lt9611_i2c_write_byte(0x16,0xf3);
 
 	lt9611_i2c_write_byte(0x11,0x5a); //Pcr reset
-	lt9611_i2c_write_byte(0x11,0xf8);
+	lt9611_i2c_write_byte(0x11,0xfa);
 
 	lt9611_i2c_write_byte(0xff,0x81);
 	lt9611_i2c_write_byte(0x30,0xea);
@@ -1141,26 +1129,26 @@ void LT9611_HDMI_TX_Digital(struct video_timing *video_format) //dsren
 	CVI_U8 pb0,pb2,pb4;
 	CVI_U8 infoFrame_en;
 
-	infoFrame_en = (AIF_PKT_EN|AVI_PKT_EN|SPD_PKT_EN);
+	infoFrame_en = (AIF_PKT_EN|AVI_PKT_EN);
 	//MPEG_PKT_EN,AIF_PKT_EN,SPD_PKT_EN,AVI_PKT_EN,UD0_PKT_EN,UD1_PKT_EN
 	CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Digital: infoFrame_en = 0x%x",infoFrame_en);
 
-	pb2 =  (AR<<4) + 0x08;
-	pb4 =  VIC;
+	pb2 = (AR<<4) + 0x08;
+	pb4 = VIC;
 
 	pb0 = ((pb2 + pb4) <= 0x5f)?(0x5f - pb2 - pb4):(0x15f - pb2 - pb4);
 
 	lt9611_i2c_write_byte(0xff,0x82);
 	if(lt9611.hdmi_mode == HDMI)
-		{
-			lt9611_i2c_write_byte(0xd6,0x8e); //sync polarity
-			CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Digital: HMDI mode = HDMI\n");
-		}
+	{
+		lt9611_i2c_write_byte(0xd6,0x8e); //sync polarity
+		CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Digital: HMDI mode = HDMI\n");
+	}
 	else if(lt9611.hdmi_mode == DVI)
-		{
-			lt9611_i2c_write_byte(0xd6,0x0e); //sync polarity
-			CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Digital: HMDI mode = DVI\n");
-		}
+	{
+		lt9611_i2c_write_byte(0xd6,0x0e); //sync polarity
+		CVI_TRACE_LOG(CVI_DBG_INFO, "LT9611_HDMI_TX_Digital: HMDI mode = DVI\n");
+	}
 
 	if(lt9611.audio_out==audio_i2s)
 	{
@@ -1174,22 +1162,17 @@ void LT9611_HDMI_TX_Digital(struct video_timing *video_format) //dsren
 
 	//AVI
 	lt9611_i2c_write_byte(0xff,0x84);
-	lt9611_i2c_write_byte(0x43,pb0);   //AVI_PB0
-
-	//lt9611_i2c_write_byte(0x44,0x10);//AVI_PB1
+	lt9611_i2c_write_byte(0x43,pb0);  //AVI_PB0
 	lt9611_i2c_write_byte(0x45,pb2);  //AVI_PB2
-	lt9611_i2c_write_byte(0x47,pb4);   //AVI_PB4
+	lt9611_i2c_write_byte(0x47,pb4);  //AVI_PB4
 
-	lt9611_i2c_write_byte(0xff,0x84);
 	lt9611_i2c_write_byte(0x10,0x02); //data iland
 	lt9611_i2c_write_byte(0x12,0x64); //act_h_blank
 
 	//VS_IF, 4k 30hz need send VS_IF packet.
 	if(VIC == 95)
 	{
-		lt9611_i2c_write_byte(0xff,0x84);
 		lt9611_i2c_write_byte(0x3d,infoFrame_en|UD0_PKT_EN); //UD1 infoframe enable //revise on 20200715
-
 		lt9611_i2c_write_byte(0x74,0x81);  //HB0
 		lt9611_i2c_write_byte(0x75,0x01);  //HB1
 		lt9611_i2c_write_byte(0x76,0x05);  //HB2
@@ -1202,7 +1185,6 @@ void LT9611_HDMI_TX_Digital(struct video_timing *video_format) //dsren
 	}
 	else
 	{
-		lt9611_i2c_write_byte(0xff,0x84);
 		lt9611_i2c_write_byte(0x3d,infoFrame_en); //UD1 infoframe enable
 	}
 
@@ -2450,13 +2432,13 @@ void LT9611_pattern(void)
 
 	lt9611_i2c_write_byte(0x34,0xd4); //CTS_N
 #endif
-    	LT9611_Audio_Init();
+	LT9611_Audio_Init();
 	LT9611_HDCP_Init();
 	LT9611_load_hdcp_key();
 
-    //LT9611_Read_EDID();
+ 	//LT9611_Read_EDID();
 	LT9611_HDMI_Out_Enable();
-    //LT9611_HDMI_CEC_ON(1);
+ 	//LT9611_HDMI_CEC_ON(1);
 	//lt9611_cec_msg_set_logical_address();
 
 	//while(1)
@@ -2522,7 +2504,7 @@ void LT9611_IRQ_Task(void)
   	irq_flag3=lt9611_i2c_read_byte(0x0f);
 
 	if((irq_flag1&0x80) == 0x80)
-  {
+  	{
 		lt9611_cec_msg_Interrupt_Handle(&lt9611_cec_msg);
 	}
 
@@ -2541,56 +2523,68 @@ static void __upadte_video(LT9611_VIDEO_FORMAT_E enVideoFormat)
 {
     switch(enVideoFormat)
     {
-    case E_LT9611_VIDEO_1024x768_60HZ:
-        Video_Format = video_other;
-        video = &video_1024x768_60Hz;
-        break;
-    case E_LT9611_VIDEO_1280x720_60HZ:
-        Video_Format = video_1280x720_60Hz_vic4;
-        video = &video_1280x720_60Hz;
-        break;
-    case E_LT9611_VIDEO_1280x1024_60HZ:
-        Video_Format = video_other;
-        video = &video_1280x1024_60Hz;
-        break;
-    case E_LT9611_VIDEO_1600x1200_60HZ:
-        Video_Format = video_other;
-        video = &video_1600x1200_60Hz;
-        break;
-    case E_LT9611_VIDEO_1920x1080_30HZ:
-        Video_Format=video_1920x1080_30Hz_vic;
-        video = &video_1920x1080_30Hz;
-        break;
-    case E_LT9611_VIDEO_1920x1080_60HZ:
-        Video_Format = video_1920x1080_60Hz_vic16;
-        video = &video_1920x1080_60Hz;
-        break;
-    default:
-        CVI_TRACE_LOG(CVI_DBG_INFO, "ERROR: unknown video format...\n");
-        break;
+	case E_LT9611_VIDEO_640x480_60HZ:
+		Video_Format = video_other;
+		video = &video_640x480_60Hz;
+		break;
+	case E_LT9611_VIDEO_720x576_50HZ:
+		Video_Format = video_720x576_50Hz_vic;
+		video = &video_720x576_50Hz;
+		break;
+	case E_LT9611_VIDEO_720x480_60HZ:
+		Video_Format = video_720x480_60Hz_vic3;
+		video = &video_720x480_60Hz;
+		break;
+	case E_LT9611_VIDEO_1024x768_60HZ:
+		Video_Format = video_other;
+		video = &video_1024x768_60Hz;
+		break;
+	case E_LT9611_VIDEO_1280x720_60HZ:
+		Video_Format = video_1280x720_60Hz_vic4;
+		video = &video_1280x720_60Hz;
+		break;
+	case E_LT9611_VIDEO_1280x1024_60HZ:
+		Video_Format = video_other;
+		video = &video_1280x1024_60Hz;
+		break;
+	case E_LT9611_VIDEO_1600x1200_60HZ:
+		Video_Format = video_other;
+		video = &video_1600x1200_60Hz;
+		break;
+	case E_LT9611_VIDEO_1920x1080_30HZ:
+		Video_Format=video_1920x1080_30Hz_vic;
+		video = &video_1920x1080_30Hz;
+		break;
+	case E_LT9611_VIDEO_1920x1080_60HZ:
+		Video_Format = video_1920x1080_60Hz_vic16;
+		video = &video_1920x1080_60Hz;
+		break;
+	default:
+		CVI_TRACE_LOG(CVI_DBG_INFO, "ERROR: unknown video format...\n");
+		break;
     }
 }
 
 void lt9611_init(LT9611_VIDEO_FORMAT_E enVideoFormat)
 {
-    LT9611_init_i2c();
-    LT9611_Chip_ID();
-    LT9611_System_Init();
+	LT9611_init_i2c();
+	LT9611_Chip_ID();
+	LT9611_System_Init();
 
-    LT9611_MIPI_Input_Analog();
-    LT9611_MIPI_Input_Digtal();
+	LT9611_MIPI_Input_Analog();
+	LT9611_MIPI_Input_Digtal();
 
-    __upadte_video(enVideoFormat);
+	__upadte_video(enVideoFormat);
 
-    LT9611_PLL(video);
-    LT9611_MIPI_Pcr(video);
+	LT9611_PLL(video);
+	LT9611_MIPI_Pcr(video);
 
-    LT9611_Audio_Init();
+	LT9611_Audio_Init();
 
-    LT9611_HDCP_Init();
-    LT9611_HDMI_TX_Digital(video);
-    LT9611_HDMI_TX_Phy();
-    LT9611_HDMI_Out_Enable();
+	LT9611_HDCP_Init();
+	LT9611_HDMI_TX_Digital(video);
+ 	LT9611_HDMI_TX_Phy();
+	LT9611_HDMI_Out_Enable();
 }
 
 void lt9611_set_video_format(LT9611_VIDEO_FORMAT_E enVideoFormat)
@@ -2607,10 +2601,9 @@ void lt9611_set_video_format(LT9611_VIDEO_FORMAT_E enVideoFormat)
     LT9611_HDMI_Out_Enable();
 }
 
-
 CVI_S32 lt9611_get_video_format(char* pinput_str)
 {
-	CVI_S32 i = 0;
+	CVI_S32 i;
 	bool is_find = false;
 	for(i=0;i<E_LT9611_VIDEO_MAX;i++)
 	{
@@ -2657,13 +2650,7 @@ void printHdmiHelp(char **argv)
 int main(int argc, char *argv[])
 {
 	if(argc == 1) {
-		#ifdef _pattern_test_
-			CVI_TRACE_LOG(CVI_DBG_INFO, "RUNNING HARDWARE PATTERN TEST MODE\n");
-			LT9611_init_i2c();
-			LT9611_pattern();
-		#else
-			lt9611_init(g_video_format);
-		#endif
+		lt9611_init(g_video_format);
 		return CVI_SUCCESS;
 	}
 
@@ -2707,6 +2694,7 @@ int main(int argc, char *argv[])
 	if(optind < argc){
 		printHdmiHelp(argv);
 	}
+
 	lt9611_init(g_video_format);
 
 	return CVI_SUCCESS;

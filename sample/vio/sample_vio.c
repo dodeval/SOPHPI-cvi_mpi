@@ -431,8 +431,8 @@ CVI_S32 SAMPLE_VIO_VoRotation(void)
 	 * step6:  Init VO
 	 ************************************************/
 	SAMPLE_VO_CONFIG_S stVoConfig;
-	RECT_S stDefDispRect  = {0, 0, 720, 1280};
-	SIZE_S stDefImageSize = {720, 1280};
+	RECT_S stDefDispRect  = {0, 0, 1280, 720};
+	SIZE_S stDefImageSize = {1280, 720};
 	VO_CHN VoChn = 0;
 
 	s32Ret = SAMPLE_COMM_VO_GetDefConfig(&stVoConfig);
@@ -443,7 +443,7 @@ CVI_S32 SAMPLE_VIO_VoRotation(void)
 
 	stVoConfig.VoDev	 = 0;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;
@@ -455,7 +455,7 @@ CVI_S32 SAMPLE_VIO_VoRotation(void)
 		return s32Ret;
 	}
 
-	CVI_VO_SetChnRotation(stVoConfig.VoDev, VoChn, ROTATION_90);
+	CVI_VO_SetChnRotation(stVoConfig.VoDev, VoChn, ROTATION_0);
 	SAMPLE_COMM_VPSS_Bind_VO(VpssGrp, VpssChn, stVoConfig.VoDev, VoChn);
 
 	PAUSE();

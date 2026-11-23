@@ -272,7 +272,7 @@ CVI_S32 SAMPLE_REGION_VI_VPSS_VO_START(CVI_VOID)
 		goto START_Vo_FAILED;
 	}
 
-	CVI_VO_SetChnRotation(0, 0, ROTATION_90);
+	CVI_VO_SetChnRotation(0, 0, ROTATION_0);
 
 	s32Ret = SAMPLE_COMM_VPSS_Bind_VO(0, 0, 0, 0);
 	if (s32Ret != CVI_SUCCESS) {
@@ -321,7 +321,34 @@ CVI_S32 SAMPLE_REGION_VI_VPSS_VO(CVI_S32 HandleNum, RGN_TYPE_E enType, MMF_CHN_S
 	if (s32Ret != CVI_SUCCESS)
 		return s32Ret;
 
-	pixelFormat = PIXEL_FORMAT_ARGB_1555;
+	/*****************************************************************
+	 * 1. АППАРАТНЫЙ ЗУМ: СТАБИЛЬНЫЙ И РАБОЧИЙ ВАРИАНТ RGB888 НА VPSS
+	 *****************************************************************/
+	VPSS_GRP VpssGrp = 0;
+	VPSS_CHN VpssChnZoom = 1;
+	VPSS_CHN_ATTR_S stZoomChnAttr;
+	VPSS_CROP_INFO_S stZoomCrop;
+
+	CVI_VPSS_GetChnAttr(VpssGrp, VpssChnZoom, &stZoomChnAttr);
+	stZoomChnAttr.u32Width = 300;   
+	stZoomChnAttr.u32Height = 300;
+	stZoomChnAttr.stFrameRate.s32SrcFrameRate = -1;
+	stZoomChnAttr.stFrameRate.s32DstFrameRate = -1;
+	stZoomChnAttr.enVideoFormat = VIDEO_FORMAT_LINEAR;
+	stZoomChnAttr.enPixelFormat = PIXEL_FORMAT_RGB_888; // Возвращаем рабочий RGB888
+	CVI_VPSS_SetChnAttr(VpssGrp, VpssChnZoom, &stZoomChnAttr);
+
+	stZoomCrop.bEnable = CVI_TRUE;
+	stZoomCrop.enCropCoordinate = VPSS_CROP_RATIO_COOR; 
+	stZoomCrop.stCropRect.s32X = (2560 - 200) / 2; 
+	stZoomCrop.stCropRect.s32Y = (1440 - 200) / 2; 
+	stZoomCrop.stCropRect.u32Width = 200;
+	stZoomCrop.stCropRect.u32Height = 200;
+	CVI_VPSS_SetChnCrop(VpssGrp, VpssChnZoom, &stZoomCrop);
+	CVI_VPSS_EnableChn(VpssGrp, VpssChnZoom);
+
+	// Оверлей примера создаем в родном ARGB1555 (2 байта на пиксель)
+	pixelFormat = PIXEL_FORMAT_RGB_888;
 	s32Ret = SAMPLE_COMM_REGION_Create(HandleNum, enType, pixelFormat);
 	if (s32Ret != CVI_SUCCESS) {
 		SAMPLE_PRT("SAMPLE_COMM_REGION_Create failed!\n");
@@ -335,9 +362,7 @@ CVI_S32 SAMPLE_REGION_VI_VPSS_VO(CVI_S32 HandleNum, RGN_TYPE_E enType, MMF_CHN_S
 
 	if (enType == OVERLAY_RGN || enType == OVERLAYEX_RGN) {
 		MinHandle = SAMPLE_COMM_REGION_GetMinHandle(enType);
-
 		for (i = MinHandle; i < MinHandle + HandleNum; i++) {
-			//s32Ret = SAMPLE_COMM_REGION_SetBitMap(i, Path_BMP);
 			s32Ret = SAMPLE_COMM_REGION_GetUpCanvas(i, Path_BMP);
 			if (s32Ret != CVI_SUCCESS) {
 				SAMPLE_PRT("SAMPLE_COMM_REGION_GetUpCanvas failed!\n");
@@ -346,7 +371,60 @@ CVI_S32 SAMPLE_REGION_VI_VPSS_VO(CVI_S32 HandleNum, RGN_TYPE_E enType, MMF_CHN_S
 		}
 	}
 
-	usleep(10000 * 1000);
+	RGN_HANDLE ZOOM_HDL = SAMPLE_COMM_REGION_GetMinHandle(enType); 
+
+	/*****************************************************************
+	 * 2. ЦИКЛ ВЫВОДА: УЛЬТРА-БЫСТРАЯ ПОПИКСЕЛЬНАЯ УПАКОВКА ИЗ RGB В ARGB1555
+	 *****************************************************************/
+	VIDEO_FRAME_INFO_S stFrameInfo;
+	RGN_CANVAS_INFO_S stCanvasInfo;
+	int frame_count = 0;
+	// Размер исходного RGB кадра: 300x300x3 = 270 000 байт
+	CVI_U32 u32FrameSize = 300 * 300 * 3; 
+
+	printf("[ZOOM] Запуск ультра-быстрого побитового копирования кадров...\n");
+	while (frame_count++ < 300) {
+		s32Ret = CVI_VPSS_GetChnFrame(0, 1, &stFrameInfo, 100);
+		if (s32Ret == CVI_SUCCESS) {
+			
+			if (CVI_RGN_GetCanvasInfo(ZOOM_HDL, &stCanvasInfo) == CVI_SUCCESS) {
+				
+				// Фикс: явно передаем первый элемент массива физических адресов [0]
+				CVI_U8 *pSrcRGB = (CVI_U8 *)CVI_SYS_Mmap(stFrameInfo.stVFrame.u64PhyAddr[0], u32FrameSize);
+				CVI_U16 *pDstCanvas = (CVI_U16 *)stCanvasInfo.pu8VirtAddr; 
+
+				if (pSrcRGB != NULL && pDstCanvas != NULL) {
+					int copy_lines = (stCanvasInfo.stSize.u32Height < 300) ? stCanvasInfo.stSize.u32Height : 300;
+					int copy_pixels = (stCanvasInfo.stSize.u32Width < 300) ? stCanvasInfo.stSize.u32Width : 300;
+
+					// Фикс: берем первый элемент из массива u32Stride[0]
+					int srcStrideBytes = stFrameInfo.stVFrame.u32Stride[0];
+					int dstStrideShorts = stCanvasInfo.u32Stride / 2;
+
+					for (int y = 0; y < copy_lines; y++) {
+						CVI_U8 *pSrcLine = pSrcRGB + (y * srcStrideBytes);
+						CVI_U16 *pDstLine = pDstCanvas + (y * dstStrideShorts);
+
+						for (int x = 0; x < copy_pixels; x++) {
+							// Извлекаем компоненты R, G, B из 3-байтового потока
+							CVI_U8 r = pSrcLine[x * 3 + 0];
+							CVI_U8 g = pSrcLine[x * 3 + 1];
+							CVI_U8 b = pSrcLine[x * 3 + 2];
+
+							// Ультра-быстрая побитовая упаковка в ARGB1555 силами процессора
+							pDstLine[x] = (1 << 15) | ((r >> 3) << 10) | ((g >> 3) << 5) | (b >> 3);
+						}
+					}
+
+					CVI_SYS_Munmap(pSrcRGB, u32FrameSize);
+					CVI_RGN_UpdateCanvas(ZOOM_HDL);
+				}
+			}
+			CVI_VPSS_ReleaseChnFrame(0, 1, &stFrameInfo);
+		}
+		usleep(33000); 
+	}
+
 EXIT2:
 	s32ExtRet = SAMPLE_COMM_REGION_DetachFrmChn(HandleNum, enType, pstChn);
 	if (s32ExtRet != CVI_SUCCESS)
@@ -682,7 +760,7 @@ CVI_S32 SAMPLE_REGION_VI_VPSS_VO_2LAYER(CVI_VOID)
 		goto START_Vo_FAILED;
 	}
 
-	CVI_VO_SetChnRotation(0, 0, ROTATION_90);
+	CVI_VO_SetChnRotation(0, 0, ROTATION_0);
 
 	s32Ret = SAMPLE_COMM_VPSS_Bind_VO(1, 0, 0, 0);
 	if (s32Ret != CVI_SUCCESS) {
@@ -1060,7 +1138,7 @@ CVI_S32 SAMPLE_REGION_VPSS_OSD_MULTICHN(CVI_VOID)
 		goto START_Vo_FAILED;
 	}
 
-	CVI_VO_SetChnRotation(0, 0, ROTATION_90);
+	CVI_VO_SetChnRotation(0, 0, ROTATION_0);
 
 	s32Ret = SAMPLE_COMM_VPSS_Bind_VO(3, 0, 0, 0);
 	if (s32Ret != CVI_SUCCESS) {

@@ -49,6 +49,9 @@ typedef enum {
 	DSI_PANEL_LT9611_1024x768_60,
 	DSI_PANEL_LT9611_1280x1024_60,
 	DSI_PANEL_LT9611_1600x1200_60,
+	DSI_PANEL_LT9611_720x480_60,
+	DSI_PANEL_LT9611_720x576_50,
+	DSI_PANEL_LT9611_640x480_60,
 	DSI_PANEL_NT35521,
 	DSI_PANEL_OTA7290B_1920,
 	DSI_PANEL_OTA7290B,
@@ -120,6 +123,9 @@ static char *s_panel_model_type_arr[] = {
 	"LT9611_1024x768_60",
 	"LT9611_1280x1024_60",
 	"LT9611_1600x1200_60",
+	"LT9611_720x480_60",
+	"LT9611_720x576_50",
+	"LT9611_640x480_60",
 	"NT35521",
 	"OTA7290B_1920",
 	"OTA7290B",
@@ -283,7 +289,7 @@ CVI_S32 SAMPLE_PANEL_ShowPattern(CVI_S32 patern_cmd)
 			printf("CVI_VO_ShowPattern failed with %#x!\n", ret);
 			return ret;
 		}
-		sleep(2);
+//		sleep(2);
 	} else if (patern_cmd == VO_PAT_MAX) {
 		do {
 			printPatternHelp();
@@ -304,11 +310,11 @@ CVI_S32 SAMPLE_PANEL_ShowPattern(CVI_S32 patern_cmd)
 		return ret;
 	}
 
-	ret = CVI_VO_ShowPattern(VoDev, VO_PAT_OFF);
-	if (ret != CVI_SUCCESS) {
-		printf("CVI_VO_ShowPattern failed with %#x!\n", ret);
-		return CVI_FAILURE;
-	}
+//	ret = CVI_VO_ShowPattern(VoDev, VO_PAT_OFF);
+//	if (ret != CVI_SUCCESS) {
+//		printf("CVI_VO_ShowPattern failed with %#x!\n", ret);
+//		return CVI_FAILURE;
+//	}
 
 	return CVI_SUCCESS;
 }
@@ -552,6 +558,27 @@ void SAMPLE_SET_PANEL_DESC(void)
 	case DSI_PANEL_LT9611_1600x1200_60:
 		g_panel_desc.panel_type = PANEL_MODE_DSI;
 		g_panel_desc.stdsicfg.dev_cfg = &dev_cfg_lt9611_1600x1200_60Hz;
+		g_panel_desc.stdsicfg.hs_timing_cfg = &hs_timing_cfg_lt9611;
+		g_panel_desc.stdsicfg.dsi_init_cmds = NULL;
+		g_panel_desc.stdsicfg.dsi_init_cmds_size = 0;
+		break;
+	case DSI_PANEL_LT9611_720x480_60:
+		g_panel_desc.panel_type = PANEL_MODE_DSI;
+		g_panel_desc.stdsicfg.dev_cfg = &dev_cfg_lt9611_720x480_60Hz;
+		g_panel_desc.stdsicfg.hs_timing_cfg = &hs_timing_cfg_lt9611;
+		g_panel_desc.stdsicfg.dsi_init_cmds = NULL;
+		g_panel_desc.stdsicfg.dsi_init_cmds_size = 0;
+		break;
+	case DSI_PANEL_LT9611_720x576_50:
+		g_panel_desc.panel_type = PANEL_MODE_DSI;
+		g_panel_desc.stdsicfg.dev_cfg = &dev_cfg_lt9611_720x576_50Hz;
+		g_panel_desc.stdsicfg.hs_timing_cfg = &hs_timing_cfg_lt9611;
+		g_panel_desc.stdsicfg.dsi_init_cmds = NULL;
+		g_panel_desc.stdsicfg.dsi_init_cmds_size = 0;
+		break;
+	case DSI_PANEL_LT9611_640x480_60:
+		g_panel_desc.panel_type = PANEL_MODE_DSI;
+		g_panel_desc.stdsicfg.dev_cfg = &dev_cfg_lt9611_640x480_60Hz;
 		g_panel_desc.stdsicfg.hs_timing_cfg = &hs_timing_cfg_lt9611;
 		g_panel_desc.stdsicfg.dsi_init_cmds = NULL;
 		g_panel_desc.stdsicfg.dsi_init_cmds_size = 0;

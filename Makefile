@@ -58,6 +58,8 @@ ifneq ($(FLASH_SIZE_SHRINK),y)
 	@cp -f sample/venc/sample_venc $(DESTDIR)/usr/bin
 	@cp -f sample/venc/sample_vcodec $(DESTDIR)/usr/bin
 	@cp -f sample/vdec/sample_vdec $(DESTDIR)/usr/bin
+	@cp -f sample/sample_panel/sample_panel $(DESTDIR)/usr/bin
+	@cp -f sample/sample_panel/lt9611/lt9611 $(DESTDIR)/usr/bin
 
 	#@cp -f self_test/cvi_test/cvi_test $(DESTDIR)/usr/bin
 	#@cp -f self_test/cvi_test/sensor_cfg.ini $(DESTDIR)/usr/bin

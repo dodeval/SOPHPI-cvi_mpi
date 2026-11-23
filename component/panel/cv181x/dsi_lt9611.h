@@ -5,7 +5,8 @@
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1920x1080_60Hz = {
 	.devno = 0,
-	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, MIPI_TX_LANE_2, MIPI_TX_LANE_3},
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
 	.video_mode = BURST_MODE,
@@ -27,6 +28,7 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1920x1080_60Hz = {
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1920x1080_30Hz = {
 	.devno = 0,
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
 	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
@@ -49,7 +51,8 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1920x1080_30Hz = {
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1280x720_60Hz = {
 	.devno = 0,
-	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, MIPI_TX_LANE_2, MIPI_TX_LANE_3},
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
 	.video_mode = BURST_MODE,
@@ -71,6 +74,7 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1280x720_60Hz = {
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1024x768_60Hz = {
 	.devno = 0,
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
 	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
@@ -93,7 +97,8 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1024x768_60Hz = {
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1280x1024_60Hz = {
 	.devno = 0,
-	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, MIPI_TX_LANE_2, MIPI_TX_LANE_3},
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
 	.video_mode = BURST_MODE,
@@ -115,7 +120,8 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1280x1024_60Hz = {
 
 static struct combo_dev_cfg_s dev_cfg_lt9611_1600x1200_60Hz = {
 	.devno = 0,
-	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, MIPI_TX_LANE_2, MIPI_TX_LANE_3},
+	// .lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_2, MIPI_TX_LANE_CLK, MIPI_TX_LANE_3},
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
 	.lane_pn_swap = {false, false, false, false, false},
 	.output_mode = OUTPUT_MODE_DSI_VIDEO,
 	.video_mode = BURST_MODE,
@@ -133,6 +139,72 @@ static struct combo_dev_cfg_s dev_cfg_lt9611_1600x1200_60Hz = {
 		.vid_hsa_pos_polarity = true,
 	},
 	.pixel_clk = 162000,
+};
+
+static struct combo_dev_cfg_s dev_cfg_lt9611_720x480_60Hz = {
+	.devno = 0,
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
+	.lane_pn_swap = {false, false, false, false, false},
+	.output_mode = OUTPUT_MODE_DSI_VIDEO,
+	.video_mode = BURST_MODE,
+	.output_format = OUT_FORMAT_RGB_24_BIT,
+	.sync_info = {
+		.vid_hsa_pixels = 62,
+		.vid_hbp_pixels = 60,
+		.vid_hfp_pixels = 16,
+		.vid_hline_pixels = 720,
+		.vid_vsa_lines = 6,
+		.vid_vbp_lines = 30,
+		.vid_vfp_lines = 9,
+		.vid_active_lines = 480,
+		.vid_vsa_pos_polarity = false,
+		.vid_hsa_pos_polarity = false,
+	},
+	.pixel_clk = 27000,
+};
+
+static struct combo_dev_cfg_s dev_cfg_lt9611_720x576_50Hz = {
+	.devno = 0,
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
+	.lane_pn_swap = {false, false, false, false, false},
+	.output_mode = OUTPUT_MODE_DSI_VIDEO,
+	.video_mode = BURST_MODE,
+	.output_format = OUT_FORMAT_RGB_24_BIT,
+	.sync_info = {
+		.vid_hsa_pixels = 64,
+		.vid_hbp_pixels = 68,
+		.vid_hfp_pixels = 12,
+		.vid_hline_pixels = 720,
+		.vid_vsa_lines = 5,
+		.vid_vbp_lines = 39,
+		.vid_vfp_lines = 5,
+		.vid_active_lines = 576,
+		.vid_vsa_pos_polarity = false,
+		.vid_hsa_pos_polarity = false,
+	},
+	.pixel_clk = 27000, // Частота пикселей для вещательного PAL (27.00 МГц)
+};
+
+static struct combo_dev_cfg_s dev_cfg_lt9611_640x480_60Hz = {
+	.devno = 0,
+	.lane_id = {MIPI_TX_LANE_0, MIPI_TX_LANE_1, MIPI_TX_LANE_CLK, -1, -1},
+	.lane_pn_swap = {false, false, false, false, false},
+	.output_mode = OUTPUT_MODE_DSI_VIDEO,
+	.video_mode = BURST_MODE,
+	.output_format = OUT_FORMAT_RGB_24_BIT,
+	.sync_info = {
+		.vid_hsa_pixels = 96,
+		.vid_hbp_pixels = 48,
+		.vid_hfp_pixels = 16,
+		.vid_hline_pixels = 640,
+		.vid_vsa_lines = 2,
+		.vid_vbp_lines = 33,
+		.vid_vfp_lines = 10,
+		.vid_active_lines = 480,
+		.vid_vsa_pos_polarity = false, 
+		.vid_hsa_pos_polarity = false,
+	},
+	.pixel_clk = 25200, 
 };
 
 static struct hs_settle_s hs_timing_cfg_lt9611 = { .prepare = 6, .zero = 32, .trail = 5 };

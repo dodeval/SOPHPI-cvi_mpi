@@ -5,6 +5,7 @@
 obj/
 lib/
 component/isp/
+modules/isp/
 sample/audio/sample_audio
 sample/mipi_tx/lt9611/lt9611
 sample/mipi_tx/sample_dsi

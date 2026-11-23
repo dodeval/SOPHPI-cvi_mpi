@@ -700,10 +700,10 @@ CVI_S32 SAMPLE_VDEC_SEND_VPSS_SEND_VO(CVI_S32 decoding_file_num)
 #define VPSS_HEIGHT 720
 #endif
 #ifndef VO_WIDTH
-#define VO_WIDTH 720
+#define VO_WIDTH 1280
 #endif
 #ifndef VO_HEIGHT
-#define VO_HEIGHT 1280
+#define VO_HEIGHT 720
 #endif
 
 	stSize.u32Width = g_u32StreamWidth;
@@ -791,7 +791,7 @@ CVI_S32 SAMPLE_VDEC_SEND_VPSS_SEND_VO(CVI_S32 decoding_file_num)
 
 	stVoConfig.VoDev		 = VoDev;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;
@@ -803,7 +803,7 @@ CVI_S32 SAMPLE_VDEC_SEND_VPSS_SEND_VO(CVI_S32 decoding_file_num)
 		return s32Ret;
 	}
 
-	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_90);
+	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_0);
 
     /************************************************
     * step4:  Init VDEC
@@ -879,10 +879,10 @@ CVI_S32 SAMPLE_VDEC_BIND_VPSS_BIND_VO(CVI_S32 decoding_file_num)
 #define VPSS_HEIGHT 720
 #endif
 #ifndef VO_WIDTH
-#define VO_WIDTH 720
+#define VO_WIDTH 1280
 #endif
 #ifndef VO_HEIGHT
-#define VO_HEIGHT 1280
+#define VO_HEIGHT 720
 #endif
 
 	stSize.u32Width = g_u32StreamWidth;
@@ -964,7 +964,7 @@ CVI_S32 SAMPLE_VDEC_BIND_VPSS_BIND_VO(CVI_S32 decoding_file_num)
 
 	stVoConfig.VoDev		 = VoDev;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;
@@ -976,7 +976,7 @@ CVI_S32 SAMPLE_VDEC_BIND_VPSS_BIND_VO(CVI_S32 decoding_file_num)
 		return s32Ret;
 	}
 
-	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_90);
+	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_0);
 
     /************************************************
     * step4:  Init VDEC
@@ -1236,10 +1236,10 @@ CVI_S32 SAMPLE_VDEC_BIND_VO(CVI_S32 decoding_file_num)
 	int filelen;
 
 #ifndef VO_WIDTH
-#define VO_WIDTH 720
+#define VO_WIDTH 1280
 #endif
 #ifndef VO_HEIGHT
-#define VO_HEIGHT 1280
+#define VO_HEIGHT 720
 #endif
 
 	stSize.u32Width = g_u32StreamWidth;
@@ -1281,7 +1281,7 @@ CVI_S32 SAMPLE_VDEC_BIND_VO(CVI_S32 decoding_file_num)
 
 	stVoConfig.VoDev		 = VoDev;
 	stVoConfig.stVoPubAttr.enIntfType  = VO_INTF_MIPI;
-	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720x1280_60;
+	stVoConfig.stVoPubAttr.enIntfSync  = VO_OUTPUT_720P60;
 	stVoConfig.stDispRect	 = stDefDispRect;
 	stVoConfig.stImageSize	 = stDefImageSize;
 	stVoConfig.enPixFormat	 = SAMPLE_PIXEL_FORMAT;
@@ -1293,7 +1293,7 @@ CVI_S32 SAMPLE_VDEC_BIND_VO(CVI_S32 decoding_file_num)
 		return s32Ret;
 	}
 
-	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_90);
+	CVI_VO_SetChnRotation(VoDev, VoChn, ROTATION_0);
 
     /************************************************
     * step3:  Init VDEC
